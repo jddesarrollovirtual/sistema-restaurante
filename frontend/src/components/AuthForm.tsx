@@ -8,7 +8,7 @@ import { login } from '../services/authService';
 import { loginSuccess } from '../features/authSlice';
 import { Button } from './ui/Button';
 
-export const AuthForm = ({ onBack }: { onBack: () => void }) => {
+export const AuthForm = ({ role, onBack }: { role: string, onBack: () => void }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [users, setUsers] = useState<{_id: string, username: string}[]>([]);
   const [selectedUsername, setSelectedUsername] = useState('');

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../features/authSlice';
 import { logout as apiLogout } from '../services/authService';
-import type { RootState } from '../../store/store';
+import type { RootState } from '../store/store';
 import { Wallet, LogOut, Clock } from 'lucide-react';
 import { Receipt } from './Receipt';
 

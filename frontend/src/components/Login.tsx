@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AuthForm } from './AuthForm';
-import { PreviewDashboard } from './PreviewDashboard';
 import { Shield, User, ChefHat, Receipt } from 'lucide-react';
 
 export default function Login() {

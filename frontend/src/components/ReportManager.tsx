@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store/store';
-import { BarChart3, AlertCircle } from 'lucide-react';
+import { BarChart3 } from 'lucide-react';
 
 interface Report {
     _id: string;

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { logout } from '../features/authSlice';
 import { logout as apiLogout } from '../services/authService';
 import type { RootState } from '../store/store';
-import { Check, Flame, ChevronDown, ChevronUp, LogOut } from 'lucide-react';
+import { Check, Flame, ChevronDown, ChevronUp } from 'lucide-react';
 
 const socket = io('http://localhost:3000');
 
@@ -14,7 +14,7 @@ interface Order {
   _id: string;
   table: { number: string };
   items: { product: { name: string }, quantity: number }[];
-  status: 'pendiente' | 'preparando' | 'listo';
+  status: 'pendiente' | 'preparando' | 'listo' | 'entregado';
   createdAt: string;
 }
 
