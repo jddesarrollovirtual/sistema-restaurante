@@ -50,3 +50,6 @@ El proyecto utiliza un stack moderno para garantizar rendimiento, escalabilidad 
     npm install
     npm run dev
     ```
+### Usuario de prueba 
+Usuario: admin
+Contraseña: admin123
