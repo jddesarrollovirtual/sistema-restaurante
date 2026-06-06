@@ -55,3 +55,4 @@ Usuario: admin
 Contraseña: admin123
 
 <img width="1354" height="689" alt="image" src="https://github.com/user-attachments/assets/159f789e-f105-4e29-bcff-9a2b87d4e4f1" />
+<img width="1364" height="646" alt="image" src="https://github.com/user-attachments/assets/e9e310b7-7163-4dbe-8736-a815323499b4" />
