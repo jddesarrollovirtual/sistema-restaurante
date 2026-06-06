@@ -13,10 +13,9 @@ COPY . .
 
 # Build TypeScript
 RUN npm run build
-RUN ls -R dist
 
-# Expose the application port
+# Expose port
 EXPOSE 3000
 
 # Start the application
-CMD [ "npm", "start" ]
+CMD [ "node", "dist/src/app.js" ]
