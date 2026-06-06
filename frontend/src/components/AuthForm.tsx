@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Lock, Eye, EyeOff, User, Loader2 } from 'lucide-react';
-import axios from 'axios';
+import { apiClient } from '../services/api';
 import { login } from '../services/authService';
 import { loginSuccess } from '../features/authSlice';
 import { Button } from './ui/Button';
@@ -21,7 +21,7 @@ export const AuthForm = ({ onBack }: { onBack: () => void }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/users/all')
+    apiClient.get('/api/users/all')
       .then(res => setUsers(res.data))
       .catch(() => setError('Error al cargar usuarios'));
   }, []);
