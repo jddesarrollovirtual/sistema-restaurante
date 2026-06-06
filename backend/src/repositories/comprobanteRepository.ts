@@ -5,7 +5,7 @@ export const ComprobanteRepository = {
     return await Comprobante.create(data);
   },
   getLastNumero: async (tipoComprobante: string, serie: string) => {
-    const last = await Comprobante.findOne({ tipoComprobante, serie })
+    const last = await Comprobante.findOne({ tipoComprobante, serie } as any)
       .sort({ numero: -1 });
     return last ? last.numero : 0;
   },
