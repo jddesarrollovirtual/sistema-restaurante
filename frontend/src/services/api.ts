@@ -18,6 +18,7 @@ const getToken = () => {
 // Interceptor para añadir el token automáticamente
 apiClient.interceptors.request.use((config) => {
   const token = getToken();
+  console.log('DEBUG: Interceptor token found:', !!token);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
