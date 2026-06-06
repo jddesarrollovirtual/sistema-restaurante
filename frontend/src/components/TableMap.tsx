@@ -17,6 +17,13 @@ export const TableMap = ({ onTableSelect }: { onTableSelect: (id: string) => voi
   const [readyOrders, setReadyOrders] = useState<string[]>([]);
   const token = useSelector((state: RootState) => state.auth.token);
 
+  const fetchTables = async () => {
+    try {
+      const res = await apiClient.get('/api/tables');
+      setTables(res.data);
+    } catch (err) { console.error('Error fetching tables', err); }
+  };
+
   useEffect(() => {
     fetchTables();
     const interval = setInterval(fetchTables, 5000);
@@ -34,13 +41,6 @@ export const TableMap = ({ onTableSelect }: { onTableSelect: (id: string) => voi
         socket.off('orderUpdated');
     };
   }, [token]);
-
-  const fetchTables = async () => {
-    try {
-      const res = await apiClient.get('/api/tables');
-      setTables(res.data);
-    } catch (err) { console.error('Error fetching tables', err); }
-  };
 
   const getStatusStyles = (status: string, tableId: string) => {
     if (readyOrders.includes(tableId)) return 'bg-emerald-500/30 text-white border-emerald-500';

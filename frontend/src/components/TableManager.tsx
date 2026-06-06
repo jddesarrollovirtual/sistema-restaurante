@@ -19,14 +19,14 @@ export const TableManager = () => {
   const [formData, setFormData] = useState<Table>({ number: '', capacity: 2, status: 'libre', location: '' });
   const token = useSelector((state: RootState) => state.auth.token);
 
-  useEffect(() => { fetchTables(); }, [token]);
-
   const fetchTables = async () => {
     try {
       const res = await apiClient.get('/api/tables');
       setTables(res.data);
     } catch (err) { console.error('Error fetching tables', err); }
   };
+
+  useEffect(() => { fetchTables(); }, [token]);
 
   const handleOpenModal = (table: Table | null = null) => {
     setEditingTable(table);

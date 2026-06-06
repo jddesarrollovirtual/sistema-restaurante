@@ -14,18 +14,18 @@ export const CashierDashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchPendingOrders();
-    const interval = setInterval(fetchPendingOrders, 30000); // Auto-refresh cada 30s
-    return () => clearInterval(interval);
-  }, [token]);
-
   const fetchPendingOrders = async () => {
     try {
       const res = await apiClient.get('/api/orders');
       setOrders(res.data.filter((o: any) => o.status !== 'entregado'));
     } catch (err) { console.error('Error fetching orders', err); }
   };
+
+  useEffect(() => {
+    fetchPendingOrders();
+    const interval = setInterval(fetchPendingOrders, 30000); // Auto-refresh cada 30s
+    return () => clearInterval(interval);
+  }, [token]);
 
   const handleLogout = () => {
     apiLogout();

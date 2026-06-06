@@ -16,10 +16,6 @@ export const OrderHistory = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const token = useSelector((state: RootState) => state.auth.token);
 
-  useEffect(() => {
-    fetchOrders();
-  }, [token]);
-
   const fetchOrders = async () => {
     try {
       const res = await apiClient.get('/api/orders');
@@ -28,6 +24,10 @@ export const OrderHistory = () => {
       console.error('Error fetching orders', err);
     }
   };
+
+  useEffect(() => {
+    fetchOrders();
+  }, [token]);
 
   return (
     <div className="bg-[#111827] p-8 rounded-3xl border border-white/5 shadow-sm col-span-3">

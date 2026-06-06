@@ -19,10 +19,6 @@ export const ProductManager = () => {
   const [formData, setFormData] = useState<Product>({ name: '', price: 0, category: '', stock: 0 });
   const token = useSelector((state: RootState) => state.auth.token);
 
-  useEffect(() => {
-    fetchProducts();
-  }, [token]);
-
   const fetchProducts = async () => {
     try {
       const res = await apiClient.get('/api/products');
@@ -31,6 +27,10 @@ export const ProductManager = () => {
       console.error('Error fetching products', err);
     }
   };
+
+  useEffect(() => {
+    fetchProducts();
+  }, [token]);
 
   const handleOpenModal = (product: Product | null = null) => {
     setEditingProduct(product);

@@ -17,10 +17,6 @@ export const ProductCatalog = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const token = useSelector((state: RootState) => state.auth.token);
 
-  useEffect(() => {
-    fetchProducts();
-  }, [token]);
-
   const fetchProducts = async () => {
     try {
       const res = await axios.get('http://localhost:3000/api/products', {
@@ -31,6 +27,10 @@ export const ProductCatalog = () => {
       console.error('Error fetching products', err);
     }
   };
+
+  useEffect(() => {
+    fetchProducts();
+  }, [token]);
 
   const filteredProducts = products.filter(p => 
     p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
