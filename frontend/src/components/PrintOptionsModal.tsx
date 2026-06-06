@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { X, AlertCircle, Loader2 } from 'lucide-react';
-import axios from 'axios';
+import { apiClient } from '../services/api';
 
 interface PrintOptionsModalProps {
   onClose: () => void;
@@ -22,7 +22,7 @@ export const PrintOptionsModal = ({ onClose, onPrint }: PrintOptionsModalProps) 
             setError(null);
             try {
                 const endpoint = type === 'boleta_dni' ? `dni/${dni}` : `ruc/${ruc}`;
-                const res = await axios.get(`http://localhost:3000/api/identity/${endpoint}`);
+                const res = await apiClient.get(`/api/identity/${endpoint}`);
                 
                 if (type === 'boleta_dni') {
                     setBusinessName(`${res.data.nombres} ${res.data.apellidoPaterno} ${res.data.apellidoMaterno}`);
