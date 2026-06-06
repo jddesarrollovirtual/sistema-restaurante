@@ -9,6 +9,21 @@ export const apiClient = axios.create({
   baseURL: API_BASE_URL,
 });
 
+// Helper para obtener el token
+const getToken = () => {
+  const user = localStorage.getItem('user');
+  return user ? JSON.parse(user).token : null;
+};
+
+// Interceptor para añadir el token automáticamente
+apiClient.interceptors.request.use((config) => {
+  const token = getToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 // Cliente Socket.io centralizado - intentar conectar a la raíz
 export const socket = io(API_BASE_URL, {
   transports: ['websocket', 'polling'],
