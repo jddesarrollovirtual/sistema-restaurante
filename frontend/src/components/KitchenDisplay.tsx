@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react';
-import { io } from 'socket.io-client';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { apiClient, socket } from '../services/api';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../features/authSlice';
 import { logout as apiLogout } from '../services/authService';
-import type { RootState } from '../store/store';
 import { Check, Flame, ChevronDown, ChevronUp } from 'lucide-react';
-
-const socket = io('http://localhost:3000');
 
 interface Order {
   _id: string;
@@ -81,22 +77,21 @@ const OrderCard = ({ order, updateStatus }: { order: Order, updateStatus: (id: s
 
 export const KitchenDisplay = () => {
   const [orders, setOrders] = useState<Order[]>([]);
-  const token = useSelector((state: RootState) => state.auth.token);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/orders', { headers: { Authorization: `Bearer ${token}` } })
+    apiClient.get('/api/orders')
       .then(res => setOrders(res.data.filter((o: Order) => o.status !== 'entregado')));
 
     socket.on('newOrder', (newOrder: Order) => setOrders(prev => [...prev, newOrder]));
     socket.on('orderUpdated', (u: Order) => setOrders(prev => prev.map(o => o._id === u._id ? u : o)));
     
     return () => { socket.off('newOrder'); socket.off('orderUpdated'); };
-  }, [token]);
+  }, []);
 
   const updateStatus = async (id: string, status: string) => {
-    await axios.patch(`http://localhost:3000/api/orders/${id}/status`, { status }, { headers: { Authorization: `Bearer ${token}` } });
+    await apiClient.patch(`/api/orders/${id}/status`, { status });
   };
 
   const handleLogout = () => {

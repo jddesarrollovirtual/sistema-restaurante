@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { apiClient } from '../services/api';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store/store';
 import { Plus, Trash2, Edit2, X } from 'lucide-react';
@@ -23,7 +23,7 @@ export const TableManager = () => {
 
   const fetchTables = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/tables', { headers: { Authorization: `Bearer ${token}` } });
+      const res = await apiClient.get('/api/tables');
       setTables(res.data);
     } catch (err) { console.error('Error fetching tables', err); }
   };
@@ -38,9 +38,9 @@ export const TableManager = () => {
     e.preventDefault();
     try {
       if (editingTable?._id) {
-        await axios.put(`http://localhost:3000/api/tables/${editingTable._id}`, formData, { headers: { Authorization: `Bearer ${token}` } });
+        await apiClient.put(`/api/tables/${editingTable._id}`, formData);
       } else {
-        await axios.post('http://localhost:3000/api/tables', formData, { headers: { Authorization: `Bearer ${token}` } });
+        await apiClient.post('/api/tables', formData);
       }
       setIsModalOpen(false);
       fetchTables();
@@ -50,7 +50,7 @@ export const TableManager = () => {
   const deleteTable = async (id: string) => {
     if (!confirm('¿Eliminar mesa?')) return;
     try {
-      await axios.delete(`http://localhost:3000/api/tables/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await apiClient.delete(`/api/tables/${id}`);
       fetchTables();
     } catch (err) { console.error('Error deleting table', err); }
   };

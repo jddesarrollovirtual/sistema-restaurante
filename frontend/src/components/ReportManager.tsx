@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { apiClient } from '../services/api';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store/store';
 import { BarChart3 } from 'lucide-react';
@@ -18,14 +18,14 @@ export const ReportManager = () => {
     const token = useSelector((state: RootState) => state.auth.token);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/api/reports', { headers: { Authorization: `Bearer ${token}` } })
+        apiClient.get('/api/reports')
             .then(res => setReports(res.data));
     }, [token]);
 
     const handleCloseDay = async () => {
         if (!confirm('¿Estás seguro de cerrar la caja y generar el reporte del día?')) return;
         try {
-            await axios.post('http://localhost:3000/api/reports/close', {}, { headers: { Authorization: `Bearer ${token}` } });
+            await apiClient.post('/api/reports/close', {});
             alert('Cierre de caja exitoso');
             window.location.reload();
         } catch (err) {

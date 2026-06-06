@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { apiClient } from '../services/api';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store/store';
 import { Plus, Trash2, Edit2, X } from 'lucide-react';
@@ -25,9 +25,7 @@ export const ProductManager = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/products', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const res = await apiClient.get('/api/products');
       setProducts(res.data);
     } catch (err) {
       console.error('Error fetching products', err);
@@ -44,13 +42,9 @@ export const ProductManager = () => {
     e.preventDefault();
     try {
       if (editingProduct?._id) {
-        await axios.put(`http://localhost:3000/api/products/${editingProduct._id}`, formData, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await apiClient.put(`/api/products/${editingProduct._id}`, formData);
       } else {
-        await axios.post('http://localhost:3000/api/products', formData, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await apiClient.post('/api/products', formData);
       }
       setIsModalOpen(false);
       fetchProducts();
@@ -62,9 +56,7 @@ export const ProductManager = () => {
   const deleteProduct = async (id: string) => {
     if (!confirm('¿Eliminar producto?')) return;
     try {
-      await axios.delete(`http://localhost:3000/api/products/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await apiClient.delete(`/api/products/${id}`);
       fetchProducts();
     } catch (err) {
       console.error('Error deleting product', err);

@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react';
-import { io } from 'socket.io-client';
-import axios from 'axios';
+import { apiClient, socket } from '../services/api';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store/store';
 import { Table, Users, CheckCircle } from 'lucide-react';
-
-const socket = io('http://localhost:3000');
 
 interface Table {
   _id: string;
@@ -40,9 +37,7 @@ export const TableMap = ({ onTableSelect }: { onTableSelect: (id: string) => voi
 
   const fetchTables = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/tables', { 
-        headers: { Authorization: `Bearer ${token}` } 
-      });
+      const res = await apiClient.get('/api/tables');
       setTables(res.data);
     } catch (err) { console.error('Error fetching tables', err); }
   };

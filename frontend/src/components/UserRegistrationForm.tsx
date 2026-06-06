@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import { apiClient } from '../services/api';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store/store';
 
@@ -11,9 +11,7 @@ export const UserRegistrationForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/api/auth/register', formData, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await apiClient.post('/api/auth/register', formData);
       setMessage('Usuario registrado exitosamente.');
       setFormData({ username: '', email: '', password: '', role: 'mesero' });
     } catch (err) {

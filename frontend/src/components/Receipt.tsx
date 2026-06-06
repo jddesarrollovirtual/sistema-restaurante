@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import { Printer } from 'lucide-react';
 import { PrintOptionsModal } from './PrintOptionsModal';
-import axios from 'axios';
+import { apiClient } from '../services/api';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store/store';
 
@@ -35,7 +35,7 @@ export const Receipt = ({ order }: ReceiptProps) => {
 
   const onPrintOptionsSubmit = async (options: any) => {
     try {
-      const response = await axios.post('http://localhost:3000/api/comprobantes', {
+      const response = await apiClient.post('/api/comprobantes', {
         tipoComprobante: options.type === 'factura' ? 'FACTURA' : 'BOLETA',
         // Fallback to '00000000' for Boleta Simple if no DNI is provided
         numeroDocumento: options.data.dni || options.data.ruc || '00000000',
@@ -43,7 +43,7 @@ export const Receipt = ({ order }: ReceiptProps) => {
         total: order.total,
         orderId: order._id,
         zona: order.table?.zone || 'GENERAL'
-      }, { headers: { Authorization: `Bearer ${token}` } });
+      });
       
       setComprobante(response.data);
       setShowModal(false);

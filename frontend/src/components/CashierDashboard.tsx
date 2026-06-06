@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { apiClient } from '../services/api';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../features/authSlice';
@@ -22,9 +22,7 @@ export const CashierDashboard = () => {
 
   const fetchPendingOrders = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/orders', { 
-        headers: { Authorization: `Bearer ${token}` } 
-      });
+      const res = await apiClient.get('/api/orders');
       setOrders(res.data.filter((o: any) => o.status !== 'entregado'));
     } catch (err) { console.error('Error fetching orders', err); }
   };
@@ -38,10 +36,10 @@ export const CashierDashboard = () => {
   const processPayment = async (orderId: string, _total: number) => {
     const tips = parseFloat(prompt('Ingrese el monto de propina (o 0):') || '0');
     try {
-        await axios.patch(`http://localhost:3000/api/orders/${orderId}/status`, { 
+        await apiClient.patch(`/api/orders/${orderId}/status`, { 
             status: 'cobrado',
             tips: tips
-        }, { headers: { Authorization: `Bearer ${token}` } });
+        });
         fetchPendingOrders();
     } catch (err) { alert('Error al procesar pago'); }
   };

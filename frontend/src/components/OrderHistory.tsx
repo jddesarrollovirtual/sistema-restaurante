@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { apiClient } from '../services/api';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store/store';
 
@@ -22,9 +22,7 @@ export const OrderHistory = () => {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/orders', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const res = await apiClient.get('/api/orders');
       setOrders(res.data);
     } catch (err) {
       console.error('Error fetching orders', err);

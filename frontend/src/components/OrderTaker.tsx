@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { apiClient } from '../services/api';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store/store';
 import { X, ShoppingBag, Users, Loader2, Check } from 'lucide-react';
@@ -19,7 +19,7 @@ export const OrderTaker = ({ tableId, onBack }: { tableId: string, onBack: () =>
   const userId = useSelector((state: RootState) => state.auth.user?.id);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/products', { headers: { Authorization: `Bearer ${token}` } })
+    apiClient.get('/api/products')
       .then(res => setProducts(res.data));
   }, [token]);
 
@@ -39,13 +39,13 @@ export const OrderTaker = ({ tableId, onBack }: { tableId: string, onBack: () =>
         return sum + (prod ? prod.price * item.quantity : 0);
       }, 0);
 
-      await axios.post('http://localhost:3000/api/orders', {
+      await apiClient.post('/api/orders', {
         table: tableId,
         waiter: userId,
         items,
         total,
         guests
-      }, { headers: { Authorization: `Bearer ${token}` } });
+      });
       setStatus('success');
       setTimeout(onBack, 1000);
     } catch (err) { 
