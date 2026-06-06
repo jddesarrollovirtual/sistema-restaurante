@@ -1,4 +1,4 @@
-import Table from '../models/Table';
+import Table from '../models/Table.js';
 
 export const tableRepository = {
   findAll: async () => await Table.find(),

@@ -1,4 +1,4 @@
-import Comprobante, { IComprobante } from '../models/Comprobante';
+import Comprobante, { IComprobante } from '../models/Comprobante.js';
 
 export const ComprobanteRepository = {
   create: async (data: Partial<IComprobante>) => {

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { orderService } from '../services/orderService';
-import { io } from '../app';
+import { orderService } from '../services/orderService.js';
+import { io } from '../app.js';
 
 export const orderController = {
   getAll: async (req: Request, res: Response) => {

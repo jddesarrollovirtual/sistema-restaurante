@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import * as reportService from '../services/reportService';
-import DailyReport from '../models/DailyReport';
+import * as reportService from '../services/reportService.js';
+import DailyReport from '../models/DailyReport.js';
 
 export const closeDay = async (req: Request, res: Response) => {
     try {

@@ -1,4 +1,4 @@
-import { ComprobanteRepository } from '../repositories/comprobanteRepository';
+import { ComprobanteRepository } from '../repositories/comprobanteRepository.js';
 
 export const ComprobanteService = {
   emitirComprobante: async (data: any, userId: string) => {

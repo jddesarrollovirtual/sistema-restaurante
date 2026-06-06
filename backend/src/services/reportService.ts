@@ -1,5 +1,5 @@
-import Order from '../models/Order';
-import DailyReport from '../models/DailyReport';
+import Order from '../models/Order.js';
+import DailyReport from '../models/DailyReport.js';
 import mongoose from 'mongoose';
 
 export const generateDailyReport = async () => {

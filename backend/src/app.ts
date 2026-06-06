@@ -3,15 +3,15 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
-import connectDB from './config/db';
-import authRoutes from './routes/authRoutes';
-import userRoutes from './routes/userRoutes';
-import productRoutes from './routes/productRoutes';
-import tableRoutes from './routes/tableRoutes';
-import orderRoutes from './routes/orderRoutes';
-import comprobanteRoutes from './routes/comprobanteRoutes';
-import identityRoutes from './routes/identityRoutes';
-import reportRoutes from './routes/reportRoutes';
+import connectDB from './config/db.js';
+import authRoutes from './routes/authRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import productRoutes from './routes/productRoutes.js';
+import tableRoutes from './routes/tableRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
+import comprobanteRoutes from './routes/comprobanteRoutes.js';
+import identityRoutes from './routes/identityRoutes.js';
+import reportRoutes from './routes/reportRoutes.js';
 
 dotenv.config();
 

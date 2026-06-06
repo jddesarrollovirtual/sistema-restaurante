@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ComprobanteService } from '../services/comprobanteService';
+import { ComprobanteService } from '../services/comprobanteService.js';
 
 // Extender Request para incluir usuario
 interface AuthenticatedRequest extends Request {

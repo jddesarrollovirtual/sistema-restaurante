@@ -1,4 +1,4 @@
-import Order from '../models/Order';
+import Order from '../models/Order.js';
 
 export const orderRepository = {
   findAll: async () => await Order.find().populate('table waiter items.product'),

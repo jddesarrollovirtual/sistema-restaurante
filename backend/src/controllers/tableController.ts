@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { tableService } from '../services/tableService';
+import { tableService } from '../services/tableService.js';
 
 export const tableController = {
   getAll: async (req: Request, res: Response) => {

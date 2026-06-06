@@ -1,4 +1,4 @@
-import { productRepository } from '../repositories/productRepository';
+import { productRepository } from '../repositories/productRepository.js';
 
 export const productService = {
   getAllProducts: async () => await productRepository.findAll(),

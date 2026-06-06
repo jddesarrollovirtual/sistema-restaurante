@@ -1,4 +1,4 @@
-import { tableRepository } from '../repositories/tableRepository';
+import { tableRepository } from '../repositories/tableRepository.js';
 
 export const tableService = {
   getAllTables: async () => await tableRepository.findAll(),

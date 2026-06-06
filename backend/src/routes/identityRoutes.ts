@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { IdentityController } from '../controllers/identityController';
+import { IdentityController } from '../controllers/identityController.js';
 
 const router = Router();
 

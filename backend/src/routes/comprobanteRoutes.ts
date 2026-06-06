@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ComprobanteController } from '../controllers/comprobanteController';
+import { ComprobanteController } from '../controllers/comprobanteController.js';
 
 const router = Router();
 
