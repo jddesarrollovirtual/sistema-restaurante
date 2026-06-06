@@ -25,7 +25,7 @@ export const orderController = {
   updateStatus: async (req: Request, res: Response) => {
     try {
       const { status, tips } = req.body;
-      const order = await orderService.updateOrderStatus(req.params.id, status, tips);
+      const order = await orderService.updateOrderStatus(req.params.id as string, status, tips);
       io.emit('orderUpdated', order); // Emitir evento de actualización
       res.json(order);
     } catch (err) {

@@ -20,7 +20,7 @@ export const productController = {
   },
   update: async (req: Request, res: Response) => {
     try {
-      const product = await productService.updateProduct(req.params.id, req.body);
+      const product = await productService.updateProduct(req.params.id as string, req.body);
       res.json(product);
     } catch (err) {
       res.status(500).json({ error: 'Failed to update product' });
@@ -28,7 +28,7 @@ export const productController = {
   },
   delete: async (req: Request, res: Response) => {
     try {
-      await productService.deleteProduct(req.params.id);
+      await productService.deleteProduct(req.params.id as string);
       res.status(204).send();
     } catch (err) {
       res.status(500).json({ error: 'Failed to delete product' });

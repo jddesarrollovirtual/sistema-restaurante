@@ -20,7 +20,7 @@ export const tableController = {
   },
   update: async (req: Request, res: Response) => {
     try {
-      const table = await tableService.updateTable(req.params.id, req.body);
+      const table = await tableService.updateTable(req.params.id as string, req.body);
       res.json(table);
     } catch (err) {
       res.status(500).json({ error: 'Failed to update table' });
@@ -28,7 +28,7 @@ export const tableController = {
   },
   delete: async (req: Request, res: Response) => {
     try {
-      await tableService.deleteTable(req.params.id);
+      await tableService.deleteTable(req.params.id as string);
       res.status(204).send();
     } catch (err) {
       res.status(500).json({ error: 'Failed to delete table' });
