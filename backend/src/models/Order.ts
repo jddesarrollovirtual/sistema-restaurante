@@ -4,9 +4,12 @@ export interface IOrder extends Document {
   table: mongoose.Types.ObjectId;
   waiter: mongoose.Types.ObjectId;
   items: { product: mongoose.Types.ObjectId; quantity: number }[];
-  status: 'pendiente' | 'preparando' | 'listo' | 'entregado';
+  status: 'pendiente' | 'preparando' | 'listo' | 'entregado' | 'cobrado';
   total: number;
+  tips: number;
   guests: number;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const OrderSchema = new Schema({

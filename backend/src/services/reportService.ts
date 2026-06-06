@@ -15,7 +15,7 @@ export const generateDailyReport = async () => {
     const orders = await Order.find({
         status: 'cobrado',
         createdAt: { $gte: today, $lt: tomorrow }
-    });
+    } as any);
 
     console.log('DEBUG: Órdenes filtradas para hoy:', orders.length);
 
