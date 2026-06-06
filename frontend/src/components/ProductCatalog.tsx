@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { apiClient } from '../services/api';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store/store';
 import { Search } from 'lucide-react';
@@ -15,13 +15,10 @@ interface Product {
 export const ProductCatalog = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const token = useSelector((state: RootState) => state.auth.token);
-
+  
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/products', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const res = await apiClient.get('/api/products');
       setProducts(res.data);
     } catch (err) {
       console.error('Error fetching products', err);
@@ -30,7 +27,7 @@ export const ProductCatalog = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, [token]);
+  }, []);
 
   const filteredProducts = products.filter(p => 
     p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
