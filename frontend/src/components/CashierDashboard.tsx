@@ -35,7 +35,7 @@ export const CashierDashboard = () => {
     navigate('/login');
   };
 
-  const processPayment = async (orderId: string, total: number) => {
+  const processPayment = async (orderId: string, _total: number) => {
     const tips = parseFloat(prompt('Ingrese el monto de propina (o 0):') || '0');
     try {
         await axios.patch(`http://localhost:3000/api/orders/${orderId}/status`, { 

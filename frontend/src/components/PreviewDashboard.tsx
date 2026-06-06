@@ -1,4 +1,4 @@
-import { TrendingUp, Users, ShoppingBag, AlertCircle } from 'lucide-react';
+import { TrendingUp, Users } from 'lucide-react';
 
 export const PreviewDashboard = () => (
   <div className="w-full bg-[#0B1020]/40 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl">
