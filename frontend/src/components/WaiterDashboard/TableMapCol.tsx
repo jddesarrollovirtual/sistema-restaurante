@@ -1,27 +1,22 @@
 import { useState, useEffect } from 'react';
-import { io } from 'socket.io-client';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { apiClient, socket } from '../../services/api';
+import { useDispatch } from 'react-redux';
 import { setTable } from '../../features/orderSlice';
-import type { RootState } from '../../store/store';
 import { Table, Bell, CheckCircle2 } from 'lucide-react';
-
-const socket = io('http://localhost:3000');
 
 interface TableType { _id: string; number: string; status: string; location: string; }
 
 export const TableMapCol = () => {
   const [tables, setTables] = useState<TableType[]>([]);
   const [readyOrders, setReadyOrders] = useState<any[]>([]);
-  const token = useSelector((state: RootState) => state.auth.token);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetch = async () => {
-        const res = await axios.get('http://localhost:3000/api/tables', { headers: { Authorization: `Bearer ${token}` } });
+    const fetchTables = async () => {
+        const res = await apiClient.get('/api/tables');
         setTables(res.data);
     };
-    fetch();
+    fetchTables();
     
     socket.on('orderUpdated', (updatedOrder: any) => {
         if(updatedOrder.status === 'listo') {
@@ -31,7 +26,7 @@ export const TableMapCol = () => {
         }
     });
     return () => { socket.off('orderUpdated'); };
-  }, [token]);
+  }, []);
 
   const getStatusStyles = (status: string, tableId: string) => {
     if (readyOrders.some(order => order.tableId === tableId)) return 'bg-emerald-900/40 border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.3)]';

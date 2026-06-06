@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import axios from 'axios';
+import { apiClient } from '../../services/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../features/orderSlice';
 import type { RootState } from '../../store/store';
@@ -11,13 +11,12 @@ export const CatalogCol = () => {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
   
   const { tableName } = useSelector((state: RootState) => state.order); 
-  const token = useSelector((state: RootState) => state.auth.token);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/products', { headers: { Authorization: `Bearer ${token}` } })
+    apiClient.get('/api/products')
         .then(res => setProducts(res.data));
-  }, [token]);
+  }, []);
 
   const categories = useMemo(() => {
     const cats = ['Todos', ...new Set(products.map(p => p.category))];

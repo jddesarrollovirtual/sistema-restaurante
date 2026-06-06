@@ -1,13 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '../../store/store';
 import { clearOrder, increaseQuantity, decreaseQuantity, removeItem } from '../../features/orderSlice';
-import axios from 'axios';
+import { apiClient } from '../../services/api';
 import { useState } from 'react';
 import { Trash2, Plus, Minus, Users } from 'lucide-react';
 
 export const OrderCol = () => {
   const { items, tableId, tableName } = useSelector((state: RootState) => state.order);
-  const token = useSelector((state: RootState) => state.auth.token);
   const userId = useSelector((state: RootState) => state.auth.user?.id);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
@@ -20,13 +19,13 @@ export const OrderCol = () => {
     if(!tableId || items.length === 0) return;
     setIsLoading(true);
     try {
-      await axios.post('http://localhost:3000/api/orders', { 
+      await apiClient.post('/api/orders', { 
         table: tableId, 
         waiter: userId, 
         items: items.map(i => ({ product: i.productId, quantity: i.quantity })), 
         total: subtotal + tax, 
         guests: guests
-      }, { headers: { Authorization: `Bearer ${token}` } });
+      });
       dispatch(clearOrder());
       alert('Pedido enviado a cocina exitosamente');
     } catch (err) {
