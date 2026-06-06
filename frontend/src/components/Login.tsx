@@ -42,7 +42,7 @@ export default function Login() {
               </motion.div>
             ) : (
               <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <AuthForm _role={selectedRole} onBack={() => setSelectedRole(null)} />
+                <AuthForm onBack={() => setSelectedRole(null)} />
               </motion.div>
             )}
           </AnimatePresence>
