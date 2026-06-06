@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { io } from 'socket.io-client';
 
-// Usa la variable de entorno configurada en Vercel o la URL de producción
+// Usa la variable de entorno configurada en Vercel o la URL de producción (ROOT del backend)
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://sistema-restaurante-backend-s9ru.onrender.com';
 
 // Cliente Axios centralizado
