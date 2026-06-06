@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "start": "node dist/app.js",
+    "debug:list": "find dist -name app.js",
     "build": "tsc",
     "test": "jest"
   },
