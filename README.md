@@ -53,3 +53,5 @@ El proyecto utiliza un stack moderno para garantizar rendimiento, escalabilidad 
 ### Usuario de prueba 
 Usuario: admin
 Contraseña: admin123
+
+<img width="1354" height="689" alt="image" src="https://github.com/user-attachments/assets/159f789e-f105-4e29-bcff-9a2b87d4e4f1" />
