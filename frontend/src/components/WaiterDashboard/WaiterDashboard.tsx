@@ -8,7 +8,7 @@ import { logout } from '../../features/authSlice';
 import { logout as apiLogout } from '../../services/authService';
 import { LogOut, Table, LayoutGrid, Receipt } from 'lucide-react';
 
-export const WaiterDashboard = () => {
+export const MeseroDashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'map' | 'catalog' | 'order'>('map');
@@ -22,7 +22,7 @@ export const WaiterDashboard = () => {
   return (
     <main className="h-screen w-screen bg-[#0B1020] text-[#F8FAFC] flex flex-col overflow-hidden font-sans">
         <header className="flex justify-between items-center px-4 py-3 md:px-8 md:py-6 border-b border-white/5 bg-[#0B1020]/50 backdrop-blur-md">
-            <h1 className="text-xl md:text-2xl font-black tracking-tighter uppercase text-indigo-400">SR 360 // Waiter</h1>
+            <h1 className="text-xl md:text-2xl font-black tracking-tighter uppercase text-indigo-400">SR 360 // Mesero</h1>
             <button onClick={handleLogout} className="flex items-center gap-2 md:gap-3 px-4 py-2 md:px-6 md:py-3 bg-red-950/30 hover:bg-red-900/50 text-red-400 rounded-xl text-sm md:text-base font-medium transition-all border border-red-900/50">
                 <LogOut size={18} /> <span className="hidden md:inline">Salir</span>
             </button>

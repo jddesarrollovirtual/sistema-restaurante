@@ -7,7 +7,7 @@ import { UserRegistrationForm } from './UserRegistrationForm';
 import { ProductManager } from './ProductManager';
 import { TableManager } from './TableManager';
 import { OrderHistory } from './OrderHistory';
-import { WaiterDashboard } from './WaiterDashboard/WaiterDashboard';
+import { MeseroDashboard } from './WaiterDashboard/WaiterDashboard';
 import { KitchenDisplay } from './KitchenDisplay';
 import { CashierDashboard } from './CashierDashboard';
 import { ReportManager } from './ReportManager';
@@ -20,7 +20,7 @@ const Dashboard = () => {
 
   if (!user) return null;
 
-  if (user.role === 'mesero') return <WaiterDashboard />;
+  if (user.role === 'mesero') return <MeseroDashboard />;
   if (user.role === 'cocinero') return <KitchenDisplay />;
   if (user.role === 'cajero') return <CashierDashboard />;
 
